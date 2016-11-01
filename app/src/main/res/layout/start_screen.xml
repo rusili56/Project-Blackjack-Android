@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="16dp"
+    android:orientation="vertical"
+    tools:context="nyc.c4q.rusili.project_blackjack_android.Activities.MainActivity">
+
+    <ImageButton
+        android:id="@+id/idPlayButton"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:onClick="onClickPlay"
+        />
+    <ImageButton
+        android:id="@+id/idInstructions"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:onClick="onClickInstructions"
+        />
+    <FrameLayout
+        android:id="@+id/idStartFrame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
+</FrameLayout>

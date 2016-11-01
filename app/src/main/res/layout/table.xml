@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    android:id="@+id/idFullLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            >
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/idMiddleColumn"
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="75"
+            >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="40">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="20"
+                >
+            </LinearLayout>
+
+            <FrameLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="80"
+                >
+
+                <FrameLayout
+                    android:id="@+id/idDealerFrame0"
+                    android:layout_width="110dp"
+                    android:layout_height="160dp"
+                    >
+                </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/idDealerFrame1"
+                    android:layout_width="110dp"
+                    android:layout_height="160dp"
+                    android:layout_marginLeft="80dp"
+                    >
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/idDealerFrame2"
+                    android:layout_width="110dp"
+                    android:layout_height="160dp"
+                    android:layout_marginLeft="160dp"
+                    >
+                </FrameLayout>
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="20">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="25
+                ">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="50
+                ">
+
+                <TextView
+                    android:id="@+id/dealertag"
+                    android:text="Dealer"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    />
+
+                <TextView
+                    android:id="@+id/playertag"
+                    android:text="Player"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="25"
+                >
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="40"
+            >
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="80"
+                >
+
+                <FrameLayout
+                    android:id="@+id/idPlayerFrame1"
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    >
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/idPlayerRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    </android.support.v7.widget.RecyclerView>
+                </FrameLayout>
+            </FrameLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/footer"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="20"
+                >
+            </LinearLayout>
+
+        </LinearLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/idRightColumn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="15"
+            >
+
+            <ImageButton
+                android:id="@+id/idibHit"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="-50dp"
+                android:onClick="onHit"
+                />
+            <ImageButton
+                android:id="@+id/idibStand"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="50dp"
+                android:onClick="onStand"
+                />
+
+            <TextView
+                android:id="@+id/idPlayerTotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="25sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="190dp"
+                />
+            <TextView
+                android:id="@+id/idDealerTotal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="25sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="-190dp"
+                />
+        </FrameLayout>
+
+    </LinearLayout>
+</FrameLayout>
