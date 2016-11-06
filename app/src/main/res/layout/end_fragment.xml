@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout
+    android:id="@+id/idFragFullBackground"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/card_skybackground25"
+    >
 
     <Space
         android:layout_width="match_parent"
@@ -9,6 +14,7 @@
         android:layout_weight="40"
         />
     <LinearLayout
+        android:id="@+id/idFragMiddelStrip"
         android:background="#000000"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -21,6 +27,7 @@
             android:layout_height="match_parent"
             android:layout_weight="25"
             />
+
         <ImageButton
             android:id="@+id/idPlayAgain"
             android:layout_width="0dp"

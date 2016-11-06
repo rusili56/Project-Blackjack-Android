@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import nyc.c4q.rusili.project_blackjack_android.Blackjack.Blackjack;
 import nyc.c4q.rusili.project_blackjack_android.R;
@@ -48,10 +49,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onHit(View view) {
+        Toast toast = Toast.makeText(this, "Hit", Toast.LENGTH_SHORT);
+        toast.show();
         Game.hit(view);
     }
 
     public void onStand(View view) {
+        Toast toast = Toast.makeText(this, "Stand", Toast.LENGTH_SHORT);
+        toast.show();
         Game.stand(view);
         iDealerTotal = Integer.parseInt(tvDealerScore.getText().toString()); iPlayerTotal = Integer.parseInt(tvPlayerScore.getText().toString());
 
