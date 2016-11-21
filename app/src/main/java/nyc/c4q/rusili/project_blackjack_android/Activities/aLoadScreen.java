@@ -9,7 +9,7 @@ import android.view.View;
 
 import nyc.c4q.rusili.project_blackjack_android.R;
 
-public class LoadScreen extends Activity{
+public class aLoadScreen extends Activity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -19,13 +19,14 @@ public class LoadScreen extends Activity{
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent toStart = new Intent(LoadScreen.this, StartScreen.class);
-                startActivity(toStart);            }
-        }, 4000);
+                Intent toStart = new Intent(aLoadScreen.this, bStartScreen.class);
+                startActivity(toStart);
+            }
+        }, 3000);
     }
 
     public void onClickStart(View view) {
-        Intent toStart = new Intent(LoadScreen.this, StartScreen.class);
+        Intent toStart = new Intent(aLoadScreen.this, bStartScreen.class);
         startActivity(toStart);
     }
 }

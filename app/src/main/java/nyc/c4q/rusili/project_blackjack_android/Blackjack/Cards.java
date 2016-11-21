@@ -4,31 +4,36 @@ import java.util.ArrayList;
 
 public class Cards extends ArrayList<Cards> {
     public final String[] Value = {"J", "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
-    public enum Suit{ Clubs, Diamonds, Hearts, Spades};
+
+    public enum Suit {Clubs, Diamonds, Hearts, Spades}
 
     Suit cardSuit;
-    String cardValue;
-    int inputValue;
+    String sCardValue;
+    int iCardValue;
 
-    public Cards(Suit inputSuit, int input){
+    public Cards(Suit inputSuit, int input) {
         this.cardSuit = inputSuit;
-        this.cardValue = Value[input];
-        inputValue = input;
+        this.sCardValue = Value[input];
+        iCardValue = input;
     }
 
-    public String getCardValue() { return this.cardValue; }
+    public String getsCardValue() {
+        return this.sCardValue;
+    }
 
-    public Suit getCardSuit() { return cardSuit; }
+    public Suit getCardSuit() {
+        return cardSuit;
+    }
 
-    public int getBlackJackValue(){
-        if (inputValue > 10){
+    public int getBlackJackValue() {
+        if (iCardValue > 10) {
             return 10;
         } else {
-            return inputValue;
+            return iCardValue;
         }
     }
 
-    public int getInputValue() {
-        return inputValue;
+    public int getiCardValue() {
+        return iCardValue;
     }
 }

@@ -16,27 +16,29 @@ import nyc.c4q.rusili.project_blackjack_android.R;
 import nyc.c4q.rusili.project_blackjack_android.Visuals.PrintDealer;
 import nyc.c4q.rusili.project_blackjack_android.Visuals.PrintPlayer;
 
-public class Blackjack extends AppCompatActivity{
+public class Blackjack extends AppCompatActivity {
 
     static Random randomGenerator = new Random();
-    Context fieldContext; static Activity fieldActivity; static RecyclerView fieldRecyclerView;
+    static Activity fieldActivity;
+    static RecyclerView fieldRecyclerView;
     static TextView tvDealerTotal, tvPlayerTotal;
-    private static Deck deck1; private static Cards[] dealerCards; private static ArrayList<Cards> playerCards;
+    private static Deck deck1;
+    private static Cards[] dealerCards;
+    private static ArrayList<Cards> playerCards;
     static int iDealerTotal, iPlayerTotal, iPlayerCards, iDealerCards;
 
     PrintDealer dPrint;
     PrintPlayer pPrint;
 
-    public Blackjack(Context ctx, Activity a, RecyclerView rvInput){
-        fieldContext = ctx;
+    public Blackjack(Activity aInput, RecyclerView rvInput) {
         fieldRecyclerView = rvInput;
-        fieldActivity = a;
+        fieldActivity = aInput;
 
         tvDealerTotal = (TextView) fieldActivity.findViewById(R.id.idDealerTotal);
         tvPlayerTotal = (TextView) fieldActivity.findViewById(R.id.idPlayerTotal);
     }
 
-    public void deal(){
+    public void deal() {
         deck1 = new Deck();
         dPrint = new PrintDealer(fieldActivity, fieldRecyclerView);
         pPrint = new PrintPlayer(fieldRecyclerView);
@@ -82,7 +84,8 @@ public class Blackjack extends AppCompatActivity{
         }, 5000);
     }
 
-    public void stand(View v){
+    public void stand(View v) {
+        dPrint.clear(2, fieldActivity);
         dPrint.Cards(2, 2, dealerCards);
 
         iDealerTotal = dealerCards[1].getBlackJackValue() + dealerCards[2].getBlackJackValue();
@@ -98,7 +101,8 @@ public class Blackjack extends AppCompatActivity{
         //check win/lose
     }
 
-    public void hit(View v){
+    public void hit(View v) {
+        dPrint.clear(2, fieldActivity);
         dPrint.Cards(2, 2, dealerCards);
 
         iDealerTotal = dealerCards[1].getBlackJackValue() + dealerCards[2].getBlackJackValue();
@@ -113,11 +117,11 @@ public class Blackjack extends AppCompatActivity{
 
         playerCards.add(deck1.drawCard(randomGenerator.nextInt(52 - deck1.cardsDrawn())));
         iPlayerCards++;
+        iPlayerTotal += playerCards.get(iPlayerCards - 1).getBlackJackValue();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 pPrint.Cards(playerCards);
-                iPlayerTotal += playerCards.get(iPlayerCards-1).getBlackJackValue();
                 tvPlayerTotal.setText(Integer.toString(iPlayerTotal));
             }
         }, 2000);
@@ -125,11 +129,11 @@ public class Blackjack extends AppCompatActivity{
         //check win/lose
     }
 
-    public static int getNumDealerCards(){
+    public static int getNumDealerCards() {
         return iDealerCards;
     }
 
-    public void lessThan16(){
+    public void lessThan16() {
 
         if (iDealerTotal < 16) {
             dealerCards[3] = deck1.drawCard(randomGenerator.nextInt(52 - deck1.cardsDrawn()));

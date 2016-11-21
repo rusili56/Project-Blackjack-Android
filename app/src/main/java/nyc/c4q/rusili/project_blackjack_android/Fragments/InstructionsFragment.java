@@ -1,7 +1,6 @@
 package nyc.c4q.rusili.project_blackjack_android.Fragments;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,14 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import nyc.c4q.rusili.project_blackjack_android.Activities.MainActivity;
 import nyc.c4q.rusili.project_blackjack_android.R;
 
 /**
  * Created by rusili on 10/26/16.
  */
 
-public class InstructionsFragment extends Fragment{
+public class InstructionsFragment extends Fragment {
 
     @Nullable
     @Override

@@ -14,7 +14,7 @@ public class Deck {
     }
 
     public Cards drawCard(int input) {
-        Cards tempCard = new Cards(cardsArrayList.get(input).getCardSuit(), cardsArrayList.get(input).getInputValue());
+        Cards tempCard = new Cards(cardsArrayList.get(input).getCardSuit(), cardsArrayList.get(input).getiCardValue());
         this.cardsArrayList.remove(input); // third card, not third in input!!
         iCardsDrawn++;
 

@@ -12,15 +12,16 @@ public class RVDecorator extends RecyclerView.ItemDecoration {
 
     private int iOverlap = 0;
 
-    public RVDecorator(int iInput){
+    public RVDecorator(int iInput) {
         this.iOverlap = iInput;
     }
 
     @Override
-    public void getItemOffsets (Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         int itemPosition = parent.getChildAdapterPosition(view);
         if (itemPosition == 0) {
-            return; }
+            return;
+        }
         outRect.left = iOverlap;
     }
 }

@@ -6,10 +6,10 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import nyc.c4q.rusili.project_blackjack_android.R;
 import nyc.c4q.rusili.project_blackjack_android.Fragments.InstructionsFragment;
+import nyc.c4q.rusili.project_blackjack_android.R;
 
-public class StartScreen extends AppCompatActivity{
+public class bStartScreen extends AppCompatActivity {
     InstructionsFragment instructionsFragment = new InstructionsFragment();
     boolean bFragOpen = false;
 
@@ -23,16 +23,19 @@ public class StartScreen extends AppCompatActivity{
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent toTable = new Intent(StartScreen.this, MainActivity.class); startActivity(toTable);
+                Intent toTable = new Intent(bStartScreen.this, cMain.class);
+                startActivity(toTable);
             }
         }, 500);
     }
 
     public void onClickInstructions(View view) {
         if (!bFragOpen) {
-            getSupportFragmentManager().beginTransaction().add(R.id.idStartFrame, instructionsFragment).commit(); bFragOpen = true;
+            getSupportFragmentManager().beginTransaction().add(R.id.idStartFrame, instructionsFragment).commit();
+            bFragOpen = true;
         } else {
-            getSupportFragmentManager().beginTransaction().remove(instructionsFragment).commit(); bFragOpen = false;
+            getSupportFragmentManager().beginTransaction().remove(instructionsFragment).commit();
+            bFragOpen = false;
         }
     }
 

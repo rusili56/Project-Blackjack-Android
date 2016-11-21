@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="16dp"
     android:orientation="vertical"
-    tools:context="nyc.c4q.rusili.project_blackjack_android.Activities.MainActivity">
+    tools:context="nyc.c4q.rusili.project_blackjack_android.Activities.cMain">
 
     <ImageButton
         android:id="@+id/idPlayButton"

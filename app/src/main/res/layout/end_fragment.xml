@@ -13,42 +13,65 @@
         android:layout_height="0dp"
         android:layout_weight="40"
         />
-    <LinearLayout
-        android:id="@+id/idFragMiddelStrip"
-        android:background="#000000"
-        android:orientation="horizontal"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="20"
         >
 
-        <Space
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/idFragMiddelStrip"
+            android:background="#000000"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="25"
-            />
+            >
 
-        <ImageButton
-            android:id="@+id/idPlayAgain"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
-            android:onClick="onClickPlayAgain"
-            />
-        <ImageButton
-            android:id="@+id/idQuit"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
-            android:onClick="onClickQuit"
-            />
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="25"
-            />
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="25"
+                />
 
-    </LinearLayout>
+            <ImageButton
+                android:id="@+id/idPlayAgain"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="25"
+                android:onClick="onClickPlayAgain"
+                />
+            <ImageButton
+                android:id="@+id/idQuit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="25"
+                android:onClick="onClickQuit"
+                />
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="25"
+                />
+
+        </LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:id="@+id/idEndFragTextOverlay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textAlignment="center"
+                android:textSize="50sp"
+                android:textColor="#FFFFFF"
+                android:text="Player Wins"
+                />
+        </FrameLayout>
+    </FrameLayout>
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="0dp"
