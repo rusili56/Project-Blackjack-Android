@@ -78,7 +78,7 @@ public class Blackjack extends AppCompatActivity {
             public void run() {
                 pPrint.Cards(playerCards);
             }
-        }, 4000);
+        }, iAnimLength * 3);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

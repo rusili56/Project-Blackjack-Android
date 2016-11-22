@@ -58,6 +58,7 @@ public class CardRViewHolder extends RecyclerView.ViewHolder {
             ivPlayerSuit1.setImageResource(R.drawable.card_suit_spades); ivPlayerSuit2.setImageResource(R.drawable.card_suit_spades);
         }
 
+        /*
         final Animation player_card = AnimationUtils.loadAnimation(ctxt, R.anim.player_offscreen);
         player_card.setAnimationListener(new Animation.AnimationListener() {
             public void onAnimationEnd(Animation animation) {}
@@ -69,6 +70,7 @@ public class CardRViewHolder extends RecyclerView.ViewHolder {
             }
         });
         v.startAnimation(player_card);
+        */
         v.setVisibility(View.VISIBLE);
     }
 

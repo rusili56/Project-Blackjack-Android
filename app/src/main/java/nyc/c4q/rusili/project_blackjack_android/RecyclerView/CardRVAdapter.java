@@ -2,7 +2,9 @@ package nyc.c4q.rusili.project_blackjack_android.RecyclerView;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -17,10 +19,12 @@ import nyc.c4q.rusili.project_blackjack_android.R;
 public class CardRVAdapter extends RecyclerView.Adapter {
     List<Cards> alCards = new ArrayList<>();
     static Context fContext;
+    int iAnimLength;
 
     public CardRVAdapter(ArrayList<Cards> alInput, Context c) {
         this.alCards = alInput;
         fContext = c;
+        iAnimLength = fContext.getResources().getInteger(R.integer.dealer_anim_length);
     }
 
     @Override
@@ -29,12 +33,19 @@ public class CardRVAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        CardRViewHolder cardHolder = (CardRViewHolder) holder;
-        Cards holderCards = alCards.get(position);
-        cardHolder.bind(holderCards);
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+        Log.d("iAnimLength", position + "  " + String.valueOf(iAnimLength));
 
-        animate(holder);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                final CardRViewHolder cardHolder = (CardRViewHolder) holder;
+                Cards holderCards = alCards.get(position);
+                cardHolder.bind(holderCards);
+
+                animate(cardHolder);
+            }
+        }, iAnimLength * (position+1));
     }
 
     public void animate(RecyclerView.ViewHolder viewHolder) {
