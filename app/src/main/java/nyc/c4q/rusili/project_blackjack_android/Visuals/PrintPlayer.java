@@ -1,5 +1,7 @@
 package nyc.c4q.rusili.project_blackjack_android.Visuals;
 
+import android.app.Activity;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -14,13 +16,15 @@ import nyc.c4q.rusili.project_blackjack_android.RecyclerView.RVDecorator;
 
 public class PrintPlayer {
     private RecyclerView fRecyclerView;
+    private Context fContext;
 
-    public PrintPlayer(RecyclerView rvInput) {
+    public PrintPlayer(RecyclerView rvInput, Context c) {
         fRecyclerView = rvInput;
+        this.fContext = c;
     }
 
     public void Cards(final ArrayList<Cards> inputCard) {
-        CardRVAdapter pCardAdapter = new CardRVAdapter(inputCard);
+        CardRVAdapter pCardAdapter = new CardRVAdapter(inputCard, fContext);
         RVDecorator decorator = new RVDecorator(-50);
         fRecyclerView.addItemDecoration(decorator);
         fRecyclerView.setAdapter(pCardAdapter);

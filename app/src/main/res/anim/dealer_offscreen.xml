@@ -7,7 +7,7 @@
         <translate
             android:fromYDelta="-100%p"
             android:toYDelta="0"
-            android:duration="1000"
+            android:duration="@integer/dealer_anim_length"
             />
     </set>
 </set>

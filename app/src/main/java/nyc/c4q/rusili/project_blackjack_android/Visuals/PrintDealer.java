@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -22,15 +23,17 @@ import nyc.c4q.rusili.project_blackjack_android.R;
 
 public class PrintDealer {
 
-    TextView tvDealerBackgroundNum, tvDealerBackgroundNum2, tvDealerNum1, tvDealerNum2;
-    ImageView ivDealerSuit1, ivDealerSuit2, ivOverlay;
+    private TextView tvDealerBackgroundNum, tvDealerBackgroundNum2, tvDealerNum1, tvDealerNum2;
+    private ImageView ivDealerSuit1, ivDealerSuit2, ivOverlay;
     private Activity fActivity;
-    RecyclerView fRecyclerView;
+    private RecyclerView fRecyclerView;
+    int iAnimLength;
     private int round = 0;
 
-    public PrintDealer(Activity aInput, RecyclerView rvInput) {
+    public PrintDealer(Activity aInput, RecyclerView rvInput, int i) {
         fActivity = aInput;
         fRecyclerView = rvInput;
+        iAnimLength = fActivity.getResources().getInteger(i);
     }
 
     public void Cards(int iStart, int iEnd, Cards[] inputCard) {
@@ -114,8 +117,9 @@ public class PrintDealer {
         tvDealerBackgroundNum.setText("");
     }
 
-    public void cardAnimation(int iInput, final CardView cvInput, final View v, final FrameLayout.LayoutParams layoutParams){
+    public void cardAnimation(int iInput, final CardView cvInput, final View v, final FrameLayout.LayoutParams layoutParams) {
         final Animation player_card = AnimationUtils.loadAnimation(fActivity, R.anim.dealer_offscreen);
+        cvInput.startAnimation(player_card);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -133,8 +137,7 @@ public class PrintDealer {
                 });
                 cvInput.startAnimation(player_card);
             }
-        }, 1000 * iInput);
-        cvInput.startAnimation(player_card);
+        }, iAnimLength * iInput);
     }
 
 }

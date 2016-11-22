@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -40,11 +41,15 @@ public class cMain extends AppCompatActivity {
 
         rvPlayer = (RecyclerView) findViewById(R.id.idPlayerRecyclerView);
         rvPlayer.setHasFixedSize(true);
+        RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
+        itemAnimator.setAddDuration(1000);
+        itemAnimator.setRemoveDuration(1000);
+        rvPlayer.setItemAnimator(itemAnimator);
         rvLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         rvPlayer.setLayoutManager(rvLayoutManager);
         rvPlayer.setAdapter(rvAdapter);
 
-        Game = new Blackjack(this, rvPlayer);
+        Game = new Blackjack(this, this, rvPlayer);
         Game.deal();
     }
 

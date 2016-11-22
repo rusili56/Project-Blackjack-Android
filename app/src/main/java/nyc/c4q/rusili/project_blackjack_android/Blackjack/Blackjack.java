@@ -19,29 +19,32 @@ import nyc.c4q.rusili.project_blackjack_android.Visuals.PrintPlayer;
 public class Blackjack extends AppCompatActivity {
 
     static Random randomGenerator = new Random();
+    static Context fContext;
     static Activity fieldActivity;
     static RecyclerView fieldRecyclerView;
     static TextView tvDealerTotal, tvPlayerTotal;
     private static Deck deck1;
     private static Cards[] dealerCards;
     private static ArrayList<Cards> playerCards;
-    static int iDealerTotal, iPlayerTotal, iPlayerCards, iDealerCards;
+    static int iDealerTotal, iPlayerTotal, iPlayerCards, iDealerCards, iAnimLength;
 
     PrintDealer dPrint;
     PrintPlayer pPrint;
 
-    public Blackjack(Activity aInput, RecyclerView rvInput) {
+    public Blackjack(Context cInput, Activity aInput, RecyclerView rvInput) {
+        fContext = cInput;
         fieldRecyclerView = rvInput;
         fieldActivity = aInput;
 
         tvDealerTotal = (TextView) fieldActivity.findViewById(R.id.idDealerTotal);
         tvPlayerTotal = (TextView) fieldActivity.findViewById(R.id.idPlayerTotal);
+        iAnimLength = fieldActivity.getResources().getInteger(R.integer.dealer_anim_length);
     }
 
     public void deal() {
         deck1 = new Deck();
-        dPrint = new PrintDealer(fieldActivity, fieldRecyclerView);
-        pPrint = new PrintPlayer(fieldRecyclerView);
+        dPrint = new PrintDealer(fieldActivity, fieldRecyclerView, R.integer.dealer_anim_length);
+        pPrint = new PrintPlayer(fieldRecyclerView, fContext);
 
         // Dealer draw:
         dealerCards = new Cards[4];
@@ -60,7 +63,7 @@ public class Blackjack extends AppCompatActivity {
             public void run() {
                 tvDealerTotal.setText(Integer.toString(iDealerTotal));
             }
-        }, 3000);
+        }, iAnimLength * 3);
 
         // Player draw:
         playerCards = new ArrayList<>();
@@ -81,7 +84,7 @@ public class Blackjack extends AppCompatActivity {
             public void run() {
                 tvPlayerTotal.setText(Integer.toString(iPlayerTotal));
             }
-        }, 5000);
+        }, iAnimLength * 4);
     }
 
     public void stand(View v) {
@@ -96,7 +99,7 @@ public class Blackjack extends AppCompatActivity {
             public void run() {
                 tvDealerTotal.setText(Integer.toString(iDealerTotal));
             }
-        }, 1000);
+        }, iAnimLength);
 
         //check win/lose
     }
@@ -113,7 +116,7 @@ public class Blackjack extends AppCompatActivity {
             public void run() {
                 tvDealerTotal.setText(Integer.toString(iDealerTotal));
             }
-        }, 1000);
+        }, iAnimLength);
 
         playerCards.add(deck1.drawCard(randomGenerator.nextInt(52 - deck1.cardsDrawn())));
         iPlayerCards++;
@@ -124,7 +127,7 @@ public class Blackjack extends AppCompatActivity {
                 pPrint.Cards(playerCards);
                 tvPlayerTotal.setText(Integer.toString(iPlayerTotal));
             }
-        }, 2000);
+        }, iAnimLength * 2);
 
         //check win/lose
     }
@@ -141,9 +144,5 @@ public class Blackjack extends AppCompatActivity {
             iDealerTotal += dealerCards[3].getBlackJackValue();
             iDealerCards = 3;
         }
-    }
-
-    public static void main(String[] args) throws IOException {
-
     }
 }

@@ -69,6 +69,7 @@ public class CardRViewHolder extends RecyclerView.ViewHolder {
             }
         });
         v.startAnimation(player_card);
+        v.setVisibility(View.VISIBLE);
     }
 
     private void findView(View v) {
