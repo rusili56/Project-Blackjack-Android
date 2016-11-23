@@ -1,3 +1,2 @@
 ideas:
 make card background frosty
-always have cards in middle (move cards depending on #)

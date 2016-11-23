@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Project-Blackjack-Android</string>
+    <string name="pWin">Player Wins!</string>
+    <string name="dWin">Dealer Wins!</string>
+    <string name="tie">Tie!</string>
+
 </resources>

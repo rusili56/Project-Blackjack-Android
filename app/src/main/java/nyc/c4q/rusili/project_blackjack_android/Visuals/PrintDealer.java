@@ -17,10 +17,6 @@ import android.widget.TextView;
 import nyc.c4q.rusili.project_blackjack_android.Blackjack.Cards;
 import nyc.c4q.rusili.project_blackjack_android.R;
 
-/**
- * Created by rusili on 11/6/16.
- */
-
 public class PrintDealer {
 
     private TextView tvDealerBackgroundNum, tvDealerBackgroundNum2, tvDealerNum1, tvDealerNum2;
@@ -57,13 +53,25 @@ public class PrintDealer {
 
             if (round == 0 && i == 2) {
                 tvDealerBackgroundNum.setText("X");
-                cardAnimation(iCardstoDraw, flTemp, v, layoutParams);
-                iCardstoDraw++;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        cardAnimation(flTemp, v, layoutParams);
+                    }
+                }, iAnimLength);
                 round++;
             } else {
                 this.setWidgets(inputCard, i);
-                cardAnimation(iCardstoDraw, flTemp, v, layoutParams);
-                iCardstoDraw++;
+                if (i == 3){
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            cardAnimation(flTemp, v, layoutParams);
+                        }
+                    }, iAnimLength);
+                } else {
+                    cardAnimation(flTemp, v, layoutParams);
+                }
             }
         }
     }
@@ -111,33 +119,26 @@ public class PrintDealer {
         }
     }
 
-    public void clear(int i, Activity fieldActivity) {
+    public void clear(Activity fieldActivity) {
         View v = fieldActivity.findViewById(R.id.idDealerFrame1);
         tvDealerBackgroundNum = (TextView) v.findViewById(R.id.idtvBackNum);
         tvDealerBackgroundNum.setText("");
     }
 
-    public void cardAnimation(int iInput, final CardView cvInput, final View v, final FrameLayout.LayoutParams layoutParams) {
+    public void cardAnimation(final CardView cvInput, final View v, final FrameLayout.LayoutParams layoutParams) {
         final Animation player_card = AnimationUtils.loadAnimation(fActivity, R.anim.dealer_offscreen);
         cvInput.startAnimation(player_card);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                player_card.setAnimationListener(new Animation.AnimationListener() {
-                    public void onAnimationEnd(Animation animation) {
-                    }
-
-                    public void onAnimationRepeat(Animation animation) {
-                    }
-
-                    public void onAnimationStart(Animation animation) {
-                        cvInput.addView(v, layoutParams);
-                        cvInput.setVisibility(View.VISIBLE);
-                    }
-                });
-                cvInput.startAnimation(player_card);
+        player_card.setAnimationListener(new Animation.AnimationListener() {
+            public void onAnimationEnd(Animation animation) {
             }
-        }, iAnimLength * iInput);
-    }
 
+            public void onAnimationRepeat(Animation animation) {
+            }
+
+            public void onAnimationStart(Animation animation) {
+                cvInput.addView(v, layoutParams);
+                cvInput.setVisibility(View.VISIBLE);
+            }
+        });
+    }
 }

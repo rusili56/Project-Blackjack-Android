@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -23,6 +24,7 @@ public class Blackjack extends AppCompatActivity {
     static Activity fieldActivity;
     static RecyclerView fieldRecyclerView;
     static TextView tvDealerTotal, tvPlayerTotal;
+    static ImageButton ibHit, ibStand;
     private static Deck deck1;
     private static Cards[] dealerCards;
     private static ArrayList<Cards> playerCards;
@@ -38,6 +40,8 @@ public class Blackjack extends AppCompatActivity {
 
         tvDealerTotal = (TextView) fieldActivity.findViewById(R.id.idDealerTotal);
         tvPlayerTotal = (TextView) fieldActivity.findViewById(R.id.idPlayerTotal);
+        ibHit = (ImageButton) fieldActivity.findViewById(R.id.idibHit);
+        ibStand = (ImageButton) fieldActivity.findViewById(R.id.idibStand);
         iAnimLength = fieldActivity.getResources().getInteger(R.integer.dealer_anim_length);
     }
 
@@ -83,14 +87,19 @@ public class Blackjack extends AppCompatActivity {
             @Override
             public void run() {
                 tvPlayerTotal.setText(Integer.toString(iPlayerTotal));
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        ibHit.setVisibility(View.VISIBLE);
+                        ibStand.setVisibility(View.VISIBLE);
+                    }
+                }, iAnimLength * 2);
             }
         }, iAnimLength * 4);
     }
 
     public void stand(View v) {
-        dPrint.clear(2, fieldActivity);
-        dPrint.Cards(2, 2, dealerCards);
-
+        dPrint.clear(fieldActivity);
         iDealerTotal = dealerCards[1].getBlackJackValue() + dealerCards[2].getBlackJackValue();
         lessThan16();
 
@@ -105,10 +114,9 @@ public class Blackjack extends AppCompatActivity {
     }
 
     public void hit(View v) {
-        dPrint.clear(2, fieldActivity);
+        dPrint.clear(fieldActivity);
         dPrint.Cards(2, 2, dealerCards);
 
-        iDealerTotal = dealerCards[1].getBlackJackValue() + dealerCards[2].getBlackJackValue();
         lessThan16();
 
         new Handler().postDelayed(new Runnable() {
@@ -140,9 +148,12 @@ public class Blackjack extends AppCompatActivity {
 
         if (iDealerTotal < 16) {
             dealerCards[3] = deck1.drawCard(randomGenerator.nextInt(52 - deck1.cardsDrawn()));
-            dPrint.Cards(3, 3, dealerCards);
+            dPrint.Cards(2, 3, dealerCards);
             iDealerTotal += dealerCards[3].getBlackJackValue();
             iDealerCards = 3;
+        } else {
+            dPrint.Cards(2, 2, dealerCards);
+            iDealerTotal = dealerCards[1].getBlackJackValue() + dealerCards[2].getBlackJackValue();
         }
     }
 }

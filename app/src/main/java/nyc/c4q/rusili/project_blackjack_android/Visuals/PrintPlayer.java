@@ -25,7 +25,7 @@ public class PrintPlayer {
 
     public void Cards(final ArrayList<Cards> inputCard) {
         CardRVAdapter pCardAdapter = new CardRVAdapter(inputCard, fContext);
-        RVDecorator decorator = new RVDecorator(-50);
+        RVDecorator decorator = new RVDecorator(-80);
         fRecyclerView.addItemDecoration(decorator);
         fRecyclerView.setAdapter(pCardAdapter);
     }

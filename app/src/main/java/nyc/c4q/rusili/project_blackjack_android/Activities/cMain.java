@@ -8,6 +8,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +27,7 @@ public class cMain extends AppCompatActivity {
     static int iDealerTotal, iPlayerTotal;
     static int iDealerWins, iPlayerWins, iTies = 0;
     private TextView tvPlayerScore, tvDealerScore;
+    private ImageButton ibHit, ibStand;
     public Bundle bundle = new Bundle();
 
     @Override
@@ -33,6 +36,10 @@ public class cMain extends AppCompatActivity {
         setContentView(R.layout.table);
         tvDealerScore = (TextView) findViewById(R.id.idDealerTotal);
         tvPlayerScore = (TextView) findViewById(R.id.idPlayerTotal);
+        ibHit = (ImageButton) findViewById(R.id.idibHit);
+        ibStand = (ImageButton) findViewById(R.id.idibStand);
+        ibHit.setVisibility(View.GONE);
+        ibStand.setVisibility(View.GONE);
 
         storage = new Storage(this);
         iDealerWins = storage.getDealerWins();
