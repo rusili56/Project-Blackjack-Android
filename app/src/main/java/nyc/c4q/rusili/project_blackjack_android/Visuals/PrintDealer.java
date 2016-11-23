@@ -4,9 +4,8 @@ import android.app.Activity;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -21,20 +20,16 @@ public class PrintDealer {
 
     private TextView tvDealerBackgroundNum, tvDealerBackgroundNum2, tvDealerNum1, tvDealerNum2;
     private ImageView ivDealerSuit1, ivDealerSuit2, ivOverlay;
-    private Activity fActivity;
-    private RecyclerView fRecyclerView;
-    int iAnimLength;
-    private int round = 0;
+    private static Activity fActivity;
+    private int iAnimLength;
+    private int iRound = 0;
 
-    public PrintDealer(Activity aInput, RecyclerView rvInput, int i) {
+    public PrintDealer(Activity aInput, int i) {
         fActivity = aInput;
-        fRecyclerView = rvInput;
         iAnimLength = fActivity.getResources().getInteger(i);
     }
 
     public void Cards(int iStart, int iEnd, Cards[] inputCard) {
-        int iCardstoDraw = 1;
-        if (iEnd == 3) iCardstoDraw = 2;
         FrameLayout frame = (FrameLayout) fActivity.findViewById(R.id.idFullLayout);
 
         for (int i = iStart; i <= iEnd; i++) {
@@ -44,33 +39,36 @@ public class PrintDealer {
             LayoutInflater li = LayoutInflater.from(fActivity);
             final View v = li.inflate(R.layout.card_template, frame, false);
             this.findView(v);
+            onClickAnimation(flTemp);
 
             final float scale = fActivity.getResources().getDisplayMetrics().density;
             int height = (int) (160 * scale + 0.5f);
             int width = (int) (120 * scale + 0.5f);
             final FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(width, height);
             flTemp.setVisibility(View.GONE);
+            final Animation player_card = AnimationUtils.loadAnimation(fActivity, R.anim.dealer_offscreen);
+            cardAnimation(flTemp, v, layoutParams, player_card);
 
-            if (round == 0 && i == 2) {
+            if (iRound == 0 && i == 2) {
                 tvDealerBackgroundNum.setText("X");
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        cardAnimation(flTemp, v, layoutParams);
+                        flTemp.startAnimation(player_card);
                     }
                 }, iAnimLength);
-                round++;
+                iRound++;
             } else {
                 this.setWidgets(inputCard, i);
-                if (i == 3){
+                if (i == 3) {
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            cardAnimation(flTemp, v, layoutParams);
+                            flTemp.startAnimation(player_card);
                         }
                     }, iAnimLength);
                 } else {
-                    cardAnimation(flTemp, v, layoutParams);
+                    flTemp.startAnimation(player_card);
                 }
             }
         }
@@ -125,9 +123,7 @@ public class PrintDealer {
         tvDealerBackgroundNum.setText("");
     }
 
-    public void cardAnimation(final CardView cvInput, final View v, final FrameLayout.LayoutParams layoutParams) {
-        final Animation player_card = AnimationUtils.loadAnimation(fActivity, R.anim.dealer_offscreen);
-        cvInput.startAnimation(player_card);
+    public void cardAnimation(final CardView cvInput, final View v, final FrameLayout.LayoutParams layoutParams, Animation player_card) {
         player_card.setAnimationListener(new Animation.AnimationListener() {
             public void onAnimationEnd(Animation animation) {
             }
@@ -138,6 +134,26 @@ public class PrintDealer {
             public void onAnimationStart(Animation animation) {
                 cvInput.addView(v, layoutParams);
                 cvInput.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    public static void onClickAnimation(View v) {
+        v.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                Animation anim_player_card = AnimationUtils.loadAnimation(fActivity.getBaseContext(), R.anim.onclick_wiggle);
+                anim_player_card.setAnimationListener(new Animation.AnimationListener() {
+                    public void onAnimationEnd(Animation animation) {
+                    }
+
+                    public void onAnimationRepeat(Animation animation) {
+                    }
+
+                    public void onAnimationStart(Animation animation) {
+                    }
+                });
+                v.startAnimation(anim_player_card);
+                return true;
             }
         });
     }

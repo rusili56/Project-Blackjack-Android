@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -14,17 +15,30 @@ import android.widget.TextView;
 import nyc.c4q.rusili.project_blackjack_android.Blackjack.Cards;
 import nyc.c4q.rusili.project_blackjack_android.R;
 
-public class CardRViewHolder extends RecyclerView.ViewHolder {
-    private Context ctxt;
+public class CardRViewHolder extends RecyclerView.ViewHolder{
+    private Context fContext;
     private View v;
     private TextView tvPlayerBackgroundNum, tvPlayerBackgroundNum2, tvPlayerNum1, tvPlayerNum2;
     private ImageView ivPlayerSuit1, ivPlayerSuit2, ivOverlay;
 
     public CardRViewHolder(ViewGroup parent) {
         super(inflateView(parent));
-        this.ctxt = parent.getContext();
+        this.fContext = parent.getContext();
         v = itemView;
         this.findView(v);
+
+        v.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent event) {
+                Animation anim_player_card = AnimationUtils.loadAnimation(fContext, R.anim.onclick_wiggle);
+                anim_player_card.setAnimationListener(new Animation.AnimationListener() {
+                    public void onAnimationEnd(Animation animation) {}
+                    public void onAnimationRepeat(Animation animation) {}
+                    public void onAnimationStart(Animation animation) {}
+                });
+                v.startAnimation(anim_player_card);
+                return true;
+            }
+        });
     }
 
     private static View inflateView(ViewGroup parent) {
@@ -35,7 +49,7 @@ public class CardRViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(Cards holderCards) {
-        int red = ContextCompat.getColor(ctxt, R.color.my_dark_red);
+        int red = ContextCompat.getColor(fContext, R.color.my_dark_red);
 
         if (holderCards.getsCardValue().equals("10")) {
             tvPlayerBackgroundNum2.setText("0");
@@ -58,19 +72,6 @@ public class CardRViewHolder extends RecyclerView.ViewHolder {
             ivPlayerSuit1.setImageResource(R.drawable.card_suit_spades); ivPlayerSuit2.setImageResource(R.drawable.card_suit_spades);
         }
 
-        /*
-        final Animation player_card = AnimationUtils.loadAnimation(ctxt, R.anim.player_offscreen);
-        player_card.setAnimationListener(new Animation.AnimationListener() {
-            public void onAnimationEnd(Animation animation) {}
-
-            public void onAnimationRepeat(Animation animation) {}
-
-            public void onAnimationStart(Animation animation) {
-                v.setVisibility(View.VISIBLE);
-            }
-        });
-        v.startAnimation(player_card);
-        */
         v.setVisibility(View.VISIBLE);
     }
 
@@ -83,4 +84,5 @@ public class CardRViewHolder extends RecyclerView.ViewHolder {
         ivPlayerSuit2 = (ImageView) v.findViewById(R.id.idivRightSuit);
         ivOverlay = (ImageView) v.findViewById(R.id.idCardOverlay);
     }
+
 }

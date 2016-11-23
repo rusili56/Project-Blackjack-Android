@@ -34,16 +34,15 @@ public class CardRVAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        Log.d("iAnimLength", position + "  " + String.valueOf(iAnimLength));
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                final CardRViewHolder cardHolder = (CardRViewHolder) holder;
-                Cards holderCards = alCards.get(position);
-                cardHolder.bind(holderCards);
+            final CardRViewHolder cardHolder = (CardRViewHolder) holder;
+            Cards holderCards = alCards.get(position);
+            cardHolder.bind(holderCards);
 
-                animate(cardHolder);
+            animate(cardHolder);
             }
         }, iAnimLength * (position+1));
     }

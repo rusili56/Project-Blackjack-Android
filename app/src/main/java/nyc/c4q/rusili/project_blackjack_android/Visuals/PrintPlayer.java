@@ -19,7 +19,7 @@ public class PrintPlayer {
     private Context fContext;
 
     public PrintPlayer(RecyclerView rvInput, Context c) {
-        fRecyclerView = rvInput;
+        this.fRecyclerView = rvInput;
         this.fContext = c;
     }
 

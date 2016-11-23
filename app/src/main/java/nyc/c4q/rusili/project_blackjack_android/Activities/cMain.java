@@ -7,6 +7,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.GestureDetector;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -18,22 +19,24 @@ import nyc.c4q.rusili.project_blackjack_android.Fragments.EndFragment;
 import nyc.c4q.rusili.project_blackjack_android.R;
 import nyc.c4q.rusili.project_blackjack_android.Utility.Storage;
 
-public class cMain extends AppCompatActivity {
+public class cMain extends AppCompatActivity{
 
     private Blackjack Game;
     private EndFragment endFrag = new EndFragment();
     private Storage storage;
     private RecyclerView rvPlayer; private RecyclerView.Adapter rvAdapter; private RecyclerView.LayoutManager rvLayoutManager;
-    static int iDealerTotal, iPlayerTotal;
-    static int iDealerWins, iPlayerWins, iTies = 0;
+    private static int iDealerTotal, iPlayerTotal;
+    private static int iDealerWins, iPlayerWins, iTies = 0;
     private TextView tvPlayerScore, tvDealerScore;
     private ImageButton ibHit, ibStand;
     public Bundle bundle = new Bundle();
+    private int iAnimLength;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.table);
+        iAnimLength = getResources().getInteger(R.integer.dealer_anim_length);
         tvDealerScore = (TextView) findViewById(R.id.idDealerTotal);
         tvPlayerScore = (TextView) findViewById(R.id.idPlayerTotal);
         ibHit = (ImageButton) findViewById(R.id.idibHit);
@@ -49,8 +52,6 @@ public class cMain extends AppCompatActivity {
         rvPlayer = (RecyclerView) findViewById(R.id.idPlayerRecyclerView);
         rvPlayer.setHasFixedSize(true);
         RecyclerView.ItemAnimator itemAnimator = new DefaultItemAnimator();
-        itemAnimator.setAddDuration(1000);
-        itemAnimator.setRemoveDuration(1000);
         rvPlayer.setItemAnimator(itemAnimator);
         rvLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         rvPlayer.setLayoutManager(rvLayoutManager);
@@ -94,7 +95,7 @@ public class cMain extends AppCompatActivity {
                 endFrag.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().add(R.id.idFullLayout, endFrag).commit();
             }
-        }, 1000 * (iNumofCards + 1));
+        }, iAnimLength * (iNumofCards + 1));
     }
 
     public void onClickQuit(View view) {
@@ -108,7 +109,7 @@ public class cMain extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().remove(endFrag).commit();
                 recreate();
             }
-        }, 500);
+        }, iAnimLength);
     }
 
     public void checkWinner() {

@@ -9,28 +9,28 @@ import android.content.SharedPreferences;
  */
 
 public class Storage {
-    private Activity fieldActivity;
-    SharedPreferences sharedPrefs;
+    private Activity fActivity;
+    SharedPreferences fSharedPrefs;
 
     public Storage(Activity a) {
-        this.fieldActivity = a;
-        sharedPrefs = fieldActivity.getSharedPreferences("BlackjackPrefs", Context.MODE_PRIVATE);
+        this.fActivity = a;
+        fSharedPrefs = fActivity.getSharedPreferences("BlackjackPrefs", Context.MODE_PRIVATE);
     }
 
     public int getDealerWins() {
-        return sharedPrefs.getInt("DealerWins", 0);
+        return fSharedPrefs.getInt("DealerWins", 0);
     }
 
     public int getPlayerWins() {
-        return sharedPrefs.getInt("PlayerWins", 0);
+        return fSharedPrefs.getInt("PlayerWins", 0);
     }
 
     public int getTies() {
-        return sharedPrefs.getInt("Ties", 0);
+        return fSharedPrefs.getInt("Ties", 0);
     }
 
     public void set(int dealer, int player, int ties) {
-        android.content.SharedPreferences.Editor editor = sharedPrefs.edit();
+        android.content.SharedPreferences.Editor editor = fSharedPrefs.edit();
         editor.putInt("DealerWins", dealer);
         editor.putInt("PlayerWins", player);
         editor.putInt("Ties", ties);

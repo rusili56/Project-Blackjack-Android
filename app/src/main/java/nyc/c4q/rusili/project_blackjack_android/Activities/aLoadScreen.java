@@ -19,8 +19,8 @@ public class aLoadScreen extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent toStart = new Intent(aLoadScreen.this, bStartScreen.class);
-                startActivity(toStart);
+            Intent toStart = new Intent(aLoadScreen.this, bStartScreen.class);
+            startActivity(toStart);
             }
         }, 3000);
     }

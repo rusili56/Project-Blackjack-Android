@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -19,36 +18,36 @@ import nyc.c4q.rusili.project_blackjack_android.Visuals.PrintPlayer;
 
 public class Blackjack extends AppCompatActivity {
 
-    static Random randomGenerator = new Random();
-    static Context fContext;
-    static Activity fieldActivity;
-    static RecyclerView fieldRecyclerView;
-    static TextView tvDealerTotal, tvPlayerTotal;
-    static ImageButton ibHit, ibStand;
+    private static Random randomGenerator = new Random();
+    private static Context fContext;
+    private static Activity fActivity;
+    private static RecyclerView fRecyclerView;
+    private static TextView tvDealerTotal, tvPlayerTotal;
+    private static ImageButton ibHit, ibStand;
     private static Deck deck1;
     private static Cards[] dealerCards;
     private static ArrayList<Cards> playerCards;
-    static int iDealerTotal, iPlayerTotal, iPlayerCards, iDealerCards, iAnimLength;
+    private static int iDealerTotal, iPlayerTotal, iPlayerCards, iDealerCards, iAnimLength;
 
     PrintDealer dPrint;
     PrintPlayer pPrint;
 
     public Blackjack(Context cInput, Activity aInput, RecyclerView rvInput) {
         fContext = cInput;
-        fieldRecyclerView = rvInput;
-        fieldActivity = aInput;
+        fRecyclerView = rvInput;
+        fActivity = aInput;
 
-        tvDealerTotal = (TextView) fieldActivity.findViewById(R.id.idDealerTotal);
-        tvPlayerTotal = (TextView) fieldActivity.findViewById(R.id.idPlayerTotal);
-        ibHit = (ImageButton) fieldActivity.findViewById(R.id.idibHit);
-        ibStand = (ImageButton) fieldActivity.findViewById(R.id.idibStand);
-        iAnimLength = fieldActivity.getResources().getInteger(R.integer.dealer_anim_length);
+        tvDealerTotal = (TextView) fActivity.findViewById(R.id.idDealerTotal);
+        tvPlayerTotal = (TextView) fActivity.findViewById(R.id.idPlayerTotal);
+        ibHit = (ImageButton) fActivity.findViewById(R.id.idibHit);
+        ibStand = (ImageButton) fActivity.findViewById(R.id.idibStand);
+        iAnimLength = fActivity.getResources().getInteger(R.integer.dealer_anim_length);
     }
 
     public void deal() {
         deck1 = new Deck();
-        dPrint = new PrintDealer(fieldActivity, fieldRecyclerView, R.integer.dealer_anim_length);
-        pPrint = new PrintPlayer(fieldRecyclerView, fContext);
+        dPrint = new PrintDealer(fActivity, R.integer.dealer_anim_length);
+        pPrint = new PrintPlayer(fRecyclerView, fContext);
 
         // Dealer draw:
         dealerCards = new Cards[4];
@@ -99,7 +98,7 @@ public class Blackjack extends AppCompatActivity {
     }
 
     public void stand(View v) {
-        dPrint.clear(fieldActivity);
+        dPrint.clear(fActivity);
         iDealerTotal = dealerCards[1].getBlackJackValue() + dealerCards[2].getBlackJackValue();
         lessThan16();
 
@@ -114,7 +113,7 @@ public class Blackjack extends AppCompatActivity {
     }
 
     public void hit(View v) {
-        dPrint.clear(fieldActivity);
+        dPrint.clear(fActivity);
         dPrint.Cards(2, 2, dealerCards);
 
         lessThan16();
