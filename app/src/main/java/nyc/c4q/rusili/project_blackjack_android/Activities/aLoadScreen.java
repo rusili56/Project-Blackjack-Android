@@ -21,6 +21,7 @@ public class aLoadScreen extends Activity {
             public void run() {
             Intent toStart = new Intent(aLoadScreen.this, bStartScreen.class);
             startActivity(toStart);
+            finish();
             }
         }, 3000);
     }
@@ -28,5 +29,6 @@ public class aLoadScreen extends Activity {
     public void onClickStart(View view) {
         Intent toStart = new Intent(aLoadScreen.this, bStartScreen.class);
         startActivity(toStart);
+        finish();
     }
 }
